@@ -1,11 +1,13 @@
 import SwiftUI
 
+@available(iOS 16.0, *)
 struct SkillSelectionView: View {
     @State private var selectedExpertSkills: Set<String> = []
     @State private var selectedTargetSkills: Set<String> = []
 
     let sampleSkills = ["Cooking", "Coding", "Photography", "Music", "Drawing", "Writing"]
 
+    @available(iOS 16.0, *)
     var body: some View {
         VStack {
             Text("Select your Skills")
@@ -57,6 +59,7 @@ struct SkillSelectionView: View {
     }
 }
 
+@available(iOS 16.0, *)
 struct SkillSelectionView_Previews: PreviewProvider {
     static var previews: some View {
         SkillSelectionView()
@@ -81,15 +84,20 @@ struct SkillTag: View {
     }
 }
 
+@available(iOS 16.0, *)
 struct FlowLayout<Content: View>: View {
     let alignment: HorizontalAlignment
     let spacing: CGFloat
-    let content: () -> Content
+    @ViewBuilder let content: () -> Content
 
     var body: some View {
-        _FlowLayout(alignment: alignment, spacing: spacing, content: content())
+        // Correct usage of Layout protocol
+        _FlowLayout(alignment: alignment, spacing: spacing) {
+            content()
+        }
     }
 
+    @available(iOS 16.0, *)
     private struct _FlowLayout: Layout {
         let alignment: HorizontalAlignment
         let spacing: CGFloat

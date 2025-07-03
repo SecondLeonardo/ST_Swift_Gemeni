@@ -1,13 +1,12 @@
 import SwiftUI
+import UIKit
 
 class AuthCoordinator: Coordinator {
-    var rootViewController: UIViewController
-    var parentCoordinator: AppCoordinator?
+    var childCoordinators: [Coordinator] = []
+    var navigationController: UINavigationController
 
-    init() {
-        // For now, we'll use a UIHostingController to host SwiftUI views
-        // In a real app, you might have a UINavigationController here
-        self.rootViewController = UIHostingController(rootView: Text("Auth Flow"))
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
     }
 
     func start() {

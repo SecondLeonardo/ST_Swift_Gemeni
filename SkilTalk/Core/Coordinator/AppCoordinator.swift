@@ -16,4 +16,10 @@ class AppCoordinator: Coordinator {
         childCoordinators.append(mainTabCoordinator)
         mainTabCoordinator.start()
     }
+
+    func onboardingDidFinish(_ coordinator: OnboardingCoordinator) {
+        childCoordinators = childCoordinators.filter { $0 !== coordinator }
+        // Transition to main app flow after onboarding
+        start()
+    }
 }

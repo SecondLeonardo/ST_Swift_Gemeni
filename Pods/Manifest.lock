@@ -1,4 +1,8 @@
 PODS:
+  - Ably (1.2.40):
+    - AblyDeltaCodec (= 1.3.3)
+    - msgpack (= 0.4.0)
+  - AblyDeltaCodec (1.3.3)
   - abseil/algorithm (1.20240722.0):
     - abseil/algorithm/algorithm (= 1.20240722.0)
     - abseil/algorithm/container (= 1.20240722.0)
@@ -1235,6 +1239,7 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.37):
     - BoringSSL-GRPC/Interface (= 0.0.37)
   - BoringSSL-GRPC/Interface (0.0.37)
+  - Daily (0.31.0)
   - Firebase/Analytics (11.15.0):
     - Firebase/Core
   - Firebase/Auth (11.15.0):
@@ -1482,30 +1487,97 @@ PODS:
   - gRPC-Core/Interface (1.69.0)
   - gRPC-Core/Privacy (1.69.0)
   - GTMSessionFetcher/Core (4.5.0)
+  - HMSAnalyticsSDK (0.0.2)
+  - HMSSDK (1.17.0):
+    - HMSAnalyticsSDK (= 0.0.2)
+    - HMSWebRTC (= 1.0.6174)
+  - HMSWebRTC (1.0.6174)
   - leveldb-library (1.22.6)
+  - msgpack (0.4.0)
   - nanopb (3.30910.0):
     - nanopb/decode (= 3.30910.0)
     - nanopb/encode (= 3.30910.0)
   - nanopb/decode (3.30910.0)
   - nanopb/encode (3.30910.0)
+  - NWWebSocket (0.5.7)
+  - OneSignal (5.2.14):
+    - OneSignal/OneSignalComplete (= 5.2.14)
+  - OneSignal/OneSignal (5.2.14):
+    - OneSignal/OneSignalCore
+    - OneSignal/OneSignalExtension
+    - OneSignal/OneSignalLiveActivities
+    - OneSignal/OneSignalNotifications
+    - OneSignal/OneSignalOSCore
+    - OneSignal/OneSignalOutcomes
+    - OneSignal/OneSignalUser
+  - OneSignal/OneSignalComplete (5.2.14):
+    - OneSignal/OneSignal
+    - OneSignal/OneSignalInAppMessages
+    - OneSignal/OneSignalLocation
+  - OneSignal/OneSignalCore (5.2.14)
+  - OneSignal/OneSignalExtension (5.2.14):
+    - OneSignal/OneSignalCore
+    - OneSignal/OneSignalOutcomes
+  - OneSignal/OneSignalInAppMessages (5.2.14):
+    - OneSignal/OneSignalCore
+    - OneSignal/OneSignalNotifications
+    - OneSignal/OneSignalOSCore
+    - OneSignal/OneSignalOutcomes
+    - OneSignal/OneSignalUser
+  - OneSignal/OneSignalLiveActivities (5.2.14):
+    - OneSignal/OneSignalCore
+    - OneSignal/OneSignalOSCore
+    - OneSignal/OneSignalUser
+  - OneSignal/OneSignalLocation (5.2.14):
+    - OneSignal/OneSignalCore
+    - OneSignal/OneSignalNotifications
+    - OneSignal/OneSignalOSCore
+    - OneSignal/OneSignalUser
+  - OneSignal/OneSignalNotifications (5.2.14):
+    - OneSignal/OneSignalCore
+    - OneSignal/OneSignalExtension
+    - OneSignal/OneSignalOutcomes
+  - OneSignal/OneSignalOSCore (5.2.14):
+    - OneSignal/OneSignalCore
+  - OneSignal/OneSignalOutcomes (5.2.14):
+    - OneSignal/OneSignalCore
+  - OneSignal/OneSignalUser (5.2.14):
+    - OneSignal/OneSignalCore
+    - OneSignal/OneSignalNotifications
+    - OneSignal/OneSignalOSCore
+    - OneSignal/OneSignalOutcomes
   - PromisesObjC (2.4.0)
+  - PusherSwift (10.1.6):
+    - NWWebSocket (~> 0.5.7)
+    - TweetNacl (~> 1.0.0)
   - RecaptchaInterop (101.0.0)
+  - RevenueCat (5.31.0)
+  - TweetNacl (1.0.2)
 
 DEPENDENCIES:
+  - Ably
   - AgoraRtcEngine_iOS
+  - Daily
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
   - Firebase/Messaging
   - Firebase/Storage
+  - HMSSDK
+  - OneSignal
+  - PusherSwift
+  - RevenueCat
 
 SPEC REPOS:
   trunk:
+    - Ably
+    - AblyDeltaCodec
     - abseil
     - AgoraInfra_iOS
     - AgoraRtcEngine_iOS
     - BoringSSL-GRPC
+    - Daily
     - Firebase
     - FirebaseAnalytics
     - FirebaseAppCheckInterop
@@ -1527,16 +1599,28 @@ SPEC REPOS:
     - "gRPC-C++"
     - gRPC-Core
     - GTMSessionFetcher
+    - HMSAnalyticsSDK
+    - HMSSDK
+    - HMSWebRTC
     - leveldb-library
+    - msgpack
     - nanopb
+    - NWWebSocket
+    - OneSignal
     - PromisesObjC
+    - PusherSwift
     - RecaptchaInterop
+    - RevenueCat
+    - TweetNacl
 
 SPEC CHECKSUMS:
+  Ably: 13695656ecc2b2ec7d49ac80372ca47a65bdad1a
+  AblyDeltaCodec: add5d06a756b3581b12aab5b5500a320b8c55bea
   abseil: a05cc83bf02079535e17169a73c5be5ba47f714b
   AgoraInfra_iOS: 3691b2b277a1712a35ae96de25af319de0d73d08
   AgoraRtcEngine_iOS: 97e2398a2addda9057815a2a583a658e36796ff6
   BoringSSL-GRPC: dded2a44897e45f28f08ae87a55ee4bcd19bc508
+  Daily: 081ef8e8eaaaaab2d20ff34ebe3c6204d305b582
   Firebase: d99ac19b909cd2c548339c2241ecd0d1599ab02e
   FirebaseAnalytics: 6433dfd311ba78084fc93bdfc145e8cb75740eae
   FirebaseAppCheckInterop: 06fe5a3799278ae4667e6c432edd86b1030fa3df
@@ -1558,11 +1642,20 @@ SPEC CHECKSUMS:
   "gRPC-C++": cc207623316fb041a7a3e774c252cf68a058b9e8
   gRPC-Core: 860978b7db482de8b4f5e10677216309b5ff6330
   GTMSessionFetcher: fc75fc972958dceedee61cb662ae1da7a83a91cf
+  HMSAnalyticsSDK: 4d2a88a729b1eb42f3d25f217c28937ec318a5b7
+  HMSSDK: 949917ebecb66845558407f8e3b3bfeef5332b02
+  HMSWebRTC: 2a9db363e4bfb2d633ab688c04f47ec20767b4ac
   leveldb-library: cc8b8f8e013647a295ad3f8cd2ddf49a6f19be19
+  msgpack: c85f6251873059738472ae136951cec5f30f3251
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
+  NWWebSocket: b4741420f1976e1dff4da3edad00c401e4f1d769
+  OneSignal: 6ff272c3d1775fb7eec3a2ffed9dc7e01963aacc
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
+  PusherSwift: fa3d5f6587c20ad5790de87a5c9b150367b5f0f5
   RecaptchaInterop: 11e0b637842dfb48308d242afc3f448062325aba
+  RevenueCat: b2463e52ab9268ef6ecacbef6a3a59566f33580b
+  TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 766fdaee02db09e7ec34ac9ce969427222f23eff
+PODFILE CHECKSUM: 17621a6aef732e597a621e49e407cd7bde8ecba7
 
 COCOAPODS: 1.16.2

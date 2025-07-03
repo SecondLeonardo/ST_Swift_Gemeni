@@ -1,11 +1,13 @@
 import SwiftUI
+import UIKit
 
 class OnboardingCoordinator: Coordinator {
-    var rootViewController: UIViewController
-    var parentCoordinator: AppCoordinator?
+    var childCoordinators: [Coordinator] = []
+    var navigationController: UINavigationController
+    weak var parentCoordinator: AppCoordinator?
 
-    init() {
-        self.rootViewController = UIHostingController(rootView: Text("Onboarding Flow"))
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
     }
 
     func start() {

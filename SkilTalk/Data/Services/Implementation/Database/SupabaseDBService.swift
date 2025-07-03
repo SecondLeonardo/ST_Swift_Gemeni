@@ -17,7 +17,7 @@ class SupabaseDBService: DatabaseServiceProtocol {
 
     func read<T: Decodable>(collection: String, documentId: String) async throws -> T? {
         let response = try await client.from(collection).select("*").eq("id", value: documentId).single().execute()
-        return try response.data.decode(T.self)
+        return try JSONDecoder().decode(T.self, from: response.data)
     }
 
     func update<T: Encodable>(collection: String, documentId: String, data: T) async throws {

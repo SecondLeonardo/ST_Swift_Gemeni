@@ -1,4 +1,3 @@
-
 # Uncomment the next line to define a global platform for your project
 platform :ios, '15.1'
 
@@ -22,8 +21,20 @@ target 'SkilTalk' do
   pod 'AgoraRtcEngine_iOS'              # For Voice and Video rooms
 
   # Add other dependencies below as needed
-  # pod 'Supabase'
-  # pod 'PusherSwift'
-  # pod 'RevenueCat'
+  # pod 'supabase-swift' # Install via Swift Package Manager (SPM) instead
+  pod 'PusherSwift'
+  pod 'Ably'
+  pod 'RevenueCat'
+  pod 'OneSignal'
+  pod 'HMSSDK' # For 100ms.live
+  pod 'Daily' # For Daily.co
 
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.1'
+    end
+  end
 end

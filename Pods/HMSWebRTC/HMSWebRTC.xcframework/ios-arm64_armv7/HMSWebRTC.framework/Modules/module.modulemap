@@ -1,0 +1,6 @@
+framework module HMSWebRTC {
+  umbrella header "HMSWebRTC.h"
+
+  export *
+  module * { export * }
+}

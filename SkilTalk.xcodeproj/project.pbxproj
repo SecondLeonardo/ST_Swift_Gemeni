@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2DD497ED2E17155F003E0CFC /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 2DD497EC2E17155F003E0CFC /* Auth */; };
+		2DD497EF2E17155F003E0CFC /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 2DD497EE2E17155F003E0CFC /* Storage */; };
+		2DD497F12E17155F003E0CFC /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 2DD497F02E17155F003E0CFC /* Supabase */; };
 		DC27289289F4047D5B82A912 /* Pods_SkilTalk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6BF212BAA7A79809C685E48 /* Pods_SkilTalk.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,16 +42,22 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2D0D95052E16D29C00547E37 /* SkilTalk */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = SkilTalk;
 			sourceTree = "<group>";
 		};
 		2D0D95132E16D29D00547E37 /* SkilTalkTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = SkilTalkTests;
 			sourceTree = "<group>";
 		};
 		2D0D951D2E16D29D00547E37 /* SkilTalkUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = SkilTalkUITests;
 			sourceTree = "<group>";
 		};
@@ -59,6 +68,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DD497F12E17155F003E0CFC /* Supabase in Frameworks */,
+				2DD497EF2E17155F003E0CFC /* Storage in Frameworks */,
+				2DD497ED2E17155F003E0CFC /* Auth in Frameworks */,
 				DC27289289F4047D5B82A912 /* Pods_SkilTalk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,6 +230,9 @@
 			);
 			mainGroup = 2D0D94FA2E16D29C00547E37;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				2DD497EB2E17155F003E0CFC /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2D0D95042E16D29C00547E37 /* Products */;
 			projectDirPath = "";
@@ -285,17 +300,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SkilTalk/Pods-SkilTalk-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SkilTalk/Pods-SkilTalk-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
-			outputPaths = (
-			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "    unsetopt KSH_ARRAYS\n   \"${PODS_ROOT}/Target Support Files/Pods-SkilTalk/Pods-SkilTalk-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SkilTalk/Pods-SkilTalk-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -391,7 +402,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -449,7 +460,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -475,6 +486,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -504,6 +516,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -629,6 +642,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2DD497EB2E17155F003E0CFC /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase-community/supabase-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2DD497EC2E17155F003E0CFC /* Auth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2DD497EB2E17155F003E0CFC /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Auth;
+		};
+		2DD497EE2E17155F003E0CFC /* Storage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2DD497EB2E17155F003E0CFC /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Storage;
+		};
+		2DD497F02E17155F003E0CFC /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2DD497EB2E17155F003E0CFC /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2D0D94FB2E16D29C00547E37 /* Project object */;
 }

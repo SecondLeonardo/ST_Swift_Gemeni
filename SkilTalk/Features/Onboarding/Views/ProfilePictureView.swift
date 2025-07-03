@@ -70,7 +70,7 @@ struct ProfilePictureView_Previews: PreviewProvider {
 // Simple ImagePicker for SwiftUI (requires UIKit interop)
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var selectedImage: UIImage?
-    @Environment(".presentationMode") private var presentationMode
+    @Environment(\.dismiss) private var dismiss
 
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let picker = UIImagePickerController()
@@ -98,11 +98,11 @@ struct ImagePicker: UIViewControllerRepresentable {
             } else if let image = info[.originalImage] as? UIImage {
                 parent.selectedImage = image
             }
-            parent.presentationMode.wrappedValue.dismiss()
+            parent.dismiss()
         }
 
         func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            parent.presentationMode.wrappedValue.dismiss()
+            parent.dismiss()
         }
     }
 }

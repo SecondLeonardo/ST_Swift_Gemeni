@@ -1,12 +1,8 @@
 import SwiftUI
 
 struct LanguageSelectionView: View {
-    @State private var selectedNativeLanguage: String? = nil
-    @State private var selectedSecondLanguage: String? = nil
-    @State private var secondLanguageProficiency: String? = nil
-
-    let languages = ["English", "Spanish", "French", "German", "Chinese", "Japanese", "Korean"]
-    let proficiencyLevels = ["Beginner", "Elementary", "Intermediate", "Advanced", "Proficient"]
+    @StateObject var viewModel: LanguageSelectionViewModel
+    let onNext: () -> Void
 
     var body: some View {
         VStack {
@@ -16,8 +12,8 @@ struct LanguageSelectionView: View {
                 .padding(.bottom, Spacing.m)
 
             Section(header: Text("Native Language").font(.headline)) {
-                Picker("Native Language", selection: $selectedNativeLanguage) {
-                    ForEach(languages, id: \.self) {
+                Picker("Native Language", selection: $viewModel.selectedNativeLanguage) {
+                    ForEach(viewModel.languages, id: \.self) {
                         Text($0)
                     }
                 }
@@ -25,15 +21,15 @@ struct LanguageSelectionView: View {
             }
 
             Section(header: Text("Second Language").font(.headline)) {
-                Picker("Second Language", selection: $selectedSecondLanguage) {
-                    ForEach(languages, id: \.self) {
+                Picker("Second Language", selection: $viewModel.selectedSecondLanguage) {
+                    ForEach(viewModel.languages, id: \.self) {
                         Text($0)
                     }
                 }
                 .pickerStyle(.wheel)
 
-                Picker("Proficiency", selection: $secondLanguageProficiency) {
-                    ForEach(proficiencyLevels, id: \.self) {
+                Picker("Proficiency", selection: $viewModel.selectedSecondLanguageProficiency) {
+                    ForEach(viewModel.proficiencyLevels, id: \.self) {
                         Text($0)
                     }
                 }
@@ -41,11 +37,16 @@ struct LanguageSelectionView: View {
             }
 
             PrimaryButton(title: "Next") {
-                // Action to proceed
+                onNext()
             }
             .padding()
 
             Spacer()
+        }
+        .onAppear {
+            Task {
+                await viewModel.loadLanguages()
+            }
         }
         .navigationTitle("")
         .navigationBarHidden(true)
@@ -54,6 +55,6 @@ struct LanguageSelectionView: View {
 
 struct LanguageSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        LanguageSelectionView()
+        LanguageSelectionView(viewModel: LanguageSelectionViewModel(referenceDataService: LocalJSONReferenceDataService()), onNext: {})
     }
 }

@@ -7,6 +7,7 @@ class LoginViewModel: ObservableObject {
     @Published var errorMessage: String? = nil
 
     private let authService: AuthServiceProtocol
+    var didAuthenticate: (() -> Void)?
 
     init(authService: AuthServiceProtocol) {
         self.authService = authService
@@ -17,7 +18,9 @@ class LoginViewModel: ObservableObject {
         errorMessage = nil
         do {
             let success = try await authService.signIn(email: email, password: password)
-            if !success {
+            if success {
+                didAuthenticate?()
+            } else {
                 errorMessage = "Invalid credentials"
             }
         } catch {

@@ -3,6 +3,7 @@ import SwiftUI
 struct ProfilePictureView: View {
     @State private var selectedImage: UIImage? = nil
     @State private var isShowingImagePicker = false
+    let onNext: () -> Void
 
     var body: some View {
         VStack {
@@ -46,7 +47,7 @@ struct ProfilePictureView: View {
             .padding(.bottom, Spacing.xxl)
 
             PrimaryButton(title: "Start Learning") {
-                // Action to proceed
+                onNext()
             }
             .disabled(selectedImage == nil)
             .padding(.horizontal)
@@ -63,7 +64,7 @@ struct ProfilePictureView: View {
 
 struct ProfilePictureView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfilePictureView()
+        ProfilePictureView(onNext: {})
     }
 }
 

@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var email = ""
-    @State private var password = ""
+    @Environment(\.presentationMode) var presentationMode // For back button
+    @StateObject var viewModel: LoginViewModel
 
     var body: some View {
         VStack(spacing: Spacing.l) {
@@ -10,16 +10,18 @@ struct LoginView: View {
                 .font(.largeTitle)
                 .foregroundColor(.primaryTeal)
 
-            TextField("Email", text: $email)
+            TextField("Email", text: $viewModel.email)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(.emailAddress)
                 .autocapitalization(.none)
 
-            SecureField("Password", text: $password)
+            SecureField("Password", text: $viewModel.password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
             PrimaryButton(title: "Sign In") {
-                // Action for Sign In
+                Task {
+                    await viewModel.signIn()
+                }
             }
 
             Button("Forgot Password?") {
@@ -30,8 +32,8 @@ struct LoginView: View {
             Spacer()
         }
         .padding()
-        .navigationTitle("")
-        .navigationBarHidden(true)
+        .navigationTitle("Back") // Show navigation title for back button
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

@@ -2,6 +2,10 @@ import Foundation
 
 class LanguageSelectionViewModel: ObservableObject {
     @Published var languages: [String] = []
+    @Published var selectedNativeLanguage: String? = nil
+    @Published var selectedSecondLanguage: String? = nil
+    @Published var selectedSecondLanguageProficiency: String? = nil
+    @Published var proficiencyLevels = ["Beginner", "Elementary", "Intermediate", "Advanced", "Proficient"]
     @Published var isLoading = false
     @Published var errorMessage: String? = nil
 

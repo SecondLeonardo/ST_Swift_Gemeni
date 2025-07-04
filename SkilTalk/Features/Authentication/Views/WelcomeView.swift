@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct WelcomeView: View {
+    let onSignInTapped: () -> Void
+    let onSignUpTapped: () -> Void
+
     var body: some View {
         VStack {
             Spacer()
@@ -23,7 +26,7 @@ struct WelcomeView: View {
                 .padding(.bottom, Spacing.xl)
 
             PrimaryButton(title: "Sign in with Apple") {
-                // Action for Sign in with Apple
+                onSignInTapped()
             }
             .padding(.horizontal)
 
@@ -38,14 +41,23 @@ struct WelcomeView: View {
             }
             .padding(.top, Spacing.l)
 
+            Button(action: onSignUpTapped) {
+                Text("Don't have an account? Sign Up")
+                    .font(.bodyText)
+                    .foregroundColor(.primaryTeal)
+            }
+            .padding(.top, Spacing.m)
+
             Spacer()
         }
         .background(Color.backgroundLight.edgesIgnoringSafeArea(.all))
+        .navigationTitle("") // Hide default navigation title
+        .navigationBarHidden(true) // Hide default navigation bar
     }
 }
 
 struct WelcomeView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeView()
+        WelcomeView(onSignInTapped: {}, onSignUpTapped: {})
     }
 }

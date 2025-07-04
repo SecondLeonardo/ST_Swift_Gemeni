@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct CountrySelectionView: View {
-    @State private var selectedCountry: String? = nil
-    let countries = ["USA", "Canada", "UK", "Germany", "France", "Japan", "China", "India"]
+    @StateObject var viewModel: CountrySelectionViewModel
+    let onNext: () -> Void
 
     var body: some View {
         VStack {
@@ -11,24 +11,29 @@ struct CountrySelectionView: View {
                 .foregroundColor(.primaryTeal)
                 .padding(.bottom, Spacing.m)
 
-            List(countries, id: \.self) {
+            List(viewModel.countries, id: \.self) {
                 country in
                 HStack {
                     Text(country)
                     Spacer()
-                    if selectedCountry == country {
+                    if viewModel.selectedCountry == country {
                         Image(systemName: "checkmark")
                             .foregroundColor(.primaryTeal)
                     }
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    selectedCountry = country
+                    viewModel.selectedCountry = country
+                }
+            }
+            .onAppear {
+                Task {
+                    await viewModel.loadCountries()
                 }
             }
 
             PrimaryButton(title: "Next") {
-                // Action to proceed
+                onNext()
             }
             .padding()
 
@@ -41,6 +46,6 @@ struct CountrySelectionView: View {
 
 struct CountrySelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        CountrySelectionView()
+        CountrySelectionView(viewModel: CountrySelectionViewModel(referenceDataService: LocalJSONReferenceDataService()), onNext: {})
     }
 }

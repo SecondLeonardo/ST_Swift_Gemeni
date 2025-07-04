@@ -11,33 +11,49 @@ class OnboardingCoordinator: Coordinator {
     }
 
     func start() {
-        print("OnboardingCoordinator started")
-        // Navigate to the first onboarding step (e.g., BasicInfoView)
+        showBasicInfo()
     }
 
-    // Methods to navigate through onboarding steps
     func showBasicInfo() {
-        print("Showing Basic Info")
+        let basicInfoViewModel = BasicInfoViewModel()
+        let basicInfoView = BasicInfoView(viewModel: basicInfoViewModel, onNext: { [weak self] in
+            self?.showCountrySelection()
+        })
+        navigationController.pushViewController(UIHostingController(rootView: basicInfoView), animated: true)
     }
 
     func showCountrySelection() {
-        print("Showing Country Selection")
+        let countrySelectionViewModel = CountrySelectionViewModel(referenceDataService: LocalJSONReferenceDataService())
+        let countrySelectionView = CountrySelectionView(viewModel: countrySelectionViewModel, onNext: { [weak self] in
+            self?.showLanguageSelection()
+        })
+        navigationController.pushViewController(UIHostingController(rootView: countrySelectionView), animated: true)
     }
 
     func showLanguageSelection() {
-        print("Showing Language Selection")
+        let languageSelectionViewModel = LanguageSelectionViewModel(referenceDataService: LocalJSONReferenceDataService())
+        let languageSelectionView = LanguageSelectionView(viewModel: languageSelectionViewModel, onNext: { [weak self] in
+            self?.showSkillSelection()
+        })
+        navigationController.pushViewController(UIHostingController(rootView: languageSelectionView), animated: true)
     }
 
     func showSkillSelection() {
-        print("Showing Skill Selection")
+        let skillSelectionViewModel = SkillSelectionViewModel(skillService: OptimizedSkillDatabaseService())
+        let skillSelectionView = SkillSelectionView(viewModel: skillSelectionViewModel, onNext: { [weak self] in
+            self?.showProfilePicture()
+        })
+        navigationController.pushViewController(UIHostingController(rootView: skillSelectionView), animated: true)
     }
 
     func showProfilePicture() {
-        print("Showing Profile Picture")
+        let profilePictureView = ProfilePictureView(onNext: { [weak self] in
+            self?.finishOnboarding()
+        })
+        navigationController.pushViewController(UIHostingController(rootView: profilePictureView), animated: true)
     }
 
     func finishOnboarding() {
-        print("Onboarding finished")
         parentCoordinator?.onboardingDidFinish(self)
     }
 }

@@ -2,6 +2,7 @@ import Foundation
 
 class CountrySelectionViewModel: ObservableObject {
     @Published var countries: [String] = []
+    @Published var selectedCountry: String? = nil
     @Published var isLoading = false
     @Published var errorMessage: String? = nil
 

@@ -8,6 +8,7 @@ class SignUpViewModel: ObservableObject {
     @Published var errorMessage: String? = nil
 
     private let authService: AuthServiceProtocol
+    var didAuthenticate: (() -> Void)?
 
     init(authService: AuthServiceProtocol) {
         self.authService = authService
@@ -23,7 +24,9 @@ class SignUpViewModel: ObservableObject {
         }
         do {
             let success = try await authService.signUp(email: email, password: password)
-            if !success {
+            if success {
+                didAuthenticate?()
+            } else {
                 errorMessage = "Sign up failed"
             }
         } catch {

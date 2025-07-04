@@ -1,9 +1,8 @@
 import SwiftUI
 
 struct SignUpView: View {
-    @State private var email = ""
-    @State private var password = ""
-    @State private var confirmPassword = ""
+    @Environment(\.presentationMode) var presentationMode // For back button
+    @StateObject var viewModel: SignUpViewModel
 
     var body: some View {
         VStack(spacing: Spacing.l) {
@@ -11,26 +10,28 @@ struct SignUpView: View {
                 .font(.largeTitle)
                 .foregroundColor(.primaryTeal)
 
-            TextField("Email", text: $email)
+            TextField("Email", text: $viewModel.email)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(.emailAddress)
                 .autocapitalization(.none)
 
-            SecureField("Password", text: $password)
+            SecureField("Password", text: $viewModel.password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
-            SecureField("Confirm Password", text: $confirmPassword)
+            SecureField("Confirm Password", text: $viewModel.confirmPassword)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
             PrimaryButton(title: "Create Account") {
-                // Action for Create Account
+                Task {
+                    await viewModel.signUp()
+                }
             }
 
             Spacer()
         }
         .padding()
-        .navigationTitle("")
-        .navigationBarHidden(true)
+        .navigationTitle("Back") // Show navigation title for back button
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

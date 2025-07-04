@@ -2,12 +2,12 @@ import SwiftUI
 
 @available(iOS 16.0, *)
 struct SkillSelectionView: View {
+    @StateObject var viewModel: SkillSelectionViewModel
+    let onNext: () -> Void
+
     @State private var selectedExpertSkills: Set<String> = []
-    @State private var selectedTargetSkills: Set<String> = []
+    @State private var var selectedTargetSkills: Set<String> = []
 
-    let sampleSkills = ["Cooking", "Coding", "Photography", "Music", "Drawing", "Writing"]
-
-    @available(iOS 16.0, *)
     var body: some View {
         VStack {
             Text("Select your Skills")
@@ -17,13 +17,13 @@ struct SkillSelectionView: View {
 
             Section(header: Text("Expert Skills (What you can teach)").font(.headline)) {
                 FlowLayout(alignment: .leading, spacing: Spacing.s) {
-                    ForEach(sampleSkills, id: \.self) {
+                    ForEach(viewModel.skills, id: \.id) {
                         skill in
-                        SkillTag(skill: skill, isSelected: selectedExpertSkills.contains(skill)) {
-                            if selectedExpertSkills.contains(skill) {
-                                selectedExpertSkills.remove(skill)
+                        SkillTag(skill: skill.name, isSelected: selectedExpertSkills.contains(skill.id)) {
+                            if selectedExpertSkills.contains(skill.id) {
+                                selectedExpertSkills.remove(skill.id)
                             } else {
-                                selectedExpertSkills.insert(skill)
+                                selectedExpertSkills.insert(skill.id)
                             }
                         }
                     }
@@ -33,13 +33,13 @@ struct SkillSelectionView: View {
 
             Section(header: Text("Target Skills (What you want to learn)").font(.headline)) {
                 FlowLayout(alignment: .leading, spacing: Spacing.s) {
-                    ForEach(sampleSkills, id: \.self) {
+                    ForEach(viewModel.skills, id: \.id) {
                         skill in
-                        SkillTag(skill: skill, isSelected: selectedTargetSkills.contains(skill)) {
-                            if selectedTargetSkills.contains(skill) {
-                                selectedTargetSkills.remove(skill)
+                        SkillTag(skill: skill.name, isSelected: selectedTargetSkills.contains(skill.id)) {
+                            if selectedTargetSkills.contains(skill.id) {
+                                selectedTargetSkills.remove(skill.id)
                             } else {
-                                selectedTargetSkills.insert(skill)
+                                selectedTargetSkills.insert(skill.id)
                             }
                         }
                     }
@@ -48,11 +48,24 @@ struct SkillSelectionView: View {
             .padding(.horizontal)
 
             PrimaryButton(title: "Next") {
-                // Action to proceed
+                onNext()
             }
             .padding()
 
             Spacer()
+        }
+        .onAppear {
+            Task {
+                // Load skills for a default language and category/subcategory for demonstration
+                // In a real app, this would be dynamic based on user selections
+                await viewModel.loadCategories(language: "en")
+                if let firstCategory = viewModel.categories.first {
+                    await viewModel.loadSubcategories(categoryId: firstCategory.id, language: "en")
+                    if let firstSubcategory = viewModel.subcategories.first {
+                        await viewModel.loadSkills(subcategoryId: firstSubcategory.id, categoryId: firstCategory.id, language: "en")
+                    }
+                }
+            }
         }
         .navigationTitle("")
         .navigationBarHidden(true)
@@ -62,7 +75,7 @@ struct SkillSelectionView: View {
 @available(iOS 16.0, *)
 struct SkillSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        SkillSelectionView()
+        SkillSelectionView(viewModel: SkillSelectionViewModel(skillService: OptimizedSkillDatabaseService()), onNext: {})
     }
 }
 

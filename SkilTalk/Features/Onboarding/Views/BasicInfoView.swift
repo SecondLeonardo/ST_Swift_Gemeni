@@ -1,11 +1,8 @@
 import SwiftUI
 
 struct BasicInfoView: View {
-    @State private var country: String = ""
-    @State private var nativeLanguage: String = ""
-    @State private var secondLanguage: String = ""
-    @State private var expertise: String = ""
-    @State private var targetSkill: String = ""
+    @StateObject var viewModel: BasicInfoViewModel
+    let onNext: () -> Void
 
     var body: some View {
         VStack(spacing: Spacing.l) {
@@ -13,23 +10,23 @@ struct BasicInfoView: View {
                 .font(.largeTitle)
                 .foregroundColor(.primaryTeal)
 
-            TextField("I'm from", text: $country)
+            TextField("I'm from", text: $viewModel.country)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
-            TextField("Native language", text: $nativeLanguage)
+            TextField("Native language", text: $viewModel.nativeLanguage)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
-            TextField("Second language", text: $secondLanguage)
+            TextField("Second language", text: $viewModel.secondLanguage)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
-            TextField("Expertise", text: $expertise)
+            TextField("Expertise", text: $viewModel.expertise)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
-            TextField("Target Skill", text: $targetSkill)
+            TextField("Target Skill", text: $viewModel.targetSkill)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
             PrimaryButton(title: "Next") {
-                // Action to proceed to next step
+                onNext()
             }
 
             Spacer()
@@ -42,6 +39,6 @@ struct BasicInfoView: View {
 
 struct BasicInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        BasicInfoView()
+        BasicInfoView(viewModel: BasicInfoViewModel(), onNext: {})
     }
 }
